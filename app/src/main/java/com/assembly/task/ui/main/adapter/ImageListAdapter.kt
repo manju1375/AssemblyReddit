@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.assembly.task.R
+import com.assembly.task.util.convertLongToTime
 import com.assemblytask.models.Children
 import com.bumptech.glide.Glide
 import com.bumptech.glide.Priority
@@ -56,7 +57,7 @@ class ImageListAdapter @Inject constructor() : RecyclerView.Adapter<RecyclerView
             this.text = postData.data?.author
         }
         viewHolder.itemView.timestamptv.apply {
-            text = "posted On "+(postData.data?.created.toString())
+            text = "posted On "+(postData.data?.created?.let { convertLongToTime(it) })
         }
     }
 
