@@ -167,6 +167,7 @@ data class ChildrenData (
     val modNote: JsonObject? = null,
 
     @SerializedName("created")
+    @Expose
     val created: Long? = null,
 
     @SerializedName("link_flair_type")

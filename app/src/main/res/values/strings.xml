@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">AssemblyReddit</string>
+    <string name="author">Author</string>
+    <string name="created">Created</string>
+    <string name="posted_on">posted On</string>
 </resources>
