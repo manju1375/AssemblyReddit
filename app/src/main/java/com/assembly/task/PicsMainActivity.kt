@@ -2,7 +2,7 @@ package com.assembly.task
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.assembly.task.ui.main.PicsMainFragment
+import com.assembly.task.ui.main.fragment.PicsMainFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 /**

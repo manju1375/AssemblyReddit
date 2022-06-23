@@ -30,7 +30,7 @@ data class AllAwardings (
   @SerializedName("count"                                ) var count                            : Int?                          = null,
   @SerializedName("static_icon_height"                   ) var staticIconHeight                 : Int?                          = null,
   @SerializedName("name"                                 ) var name                             : String?                       = null,
-  @SerializedName("resized_static_icons"                 ) var resizedStaticIcons               : ArrayList<ResizedStaticIcons> = arrayListOf(),
+  @SerializedName("resized_static_icons"                 ) var resizedStaticIcons               : ArrayList<ResizedStaticIcons>? = null,
   @SerializedName("icon_format"                          ) var iconFormat                       : String?                       = null,
   @SerializedName("icon_height"                          ) var iconHeight                       : Int?                          = null,
   @SerializedName("penny_price"                          ) var pennyPrice                       : String?                       = null,

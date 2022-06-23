@@ -1,5 +1,6 @@
 package com.assemblytask.models
 
+import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 
@@ -9,7 +10,9 @@ data class Data (
   @SerializedName("dist"       ) var dist      : Int?                = null,
   @SerializedName("modhash"    ) var modhash   : String?             = null,
   @SerializedName("geo_filter" ) var geoFilter : String?             = null,
-  @SerializedName("children"   ) var children  : ArrayList<Children> = arrayListOf(),
+  @SerializedName("children"   )
+  @Expose
+  var children  : ArrayList<Children>? = null,
   @SerializedName("before"     ) var before    : String?             = null
 
 )

@@ -3,6 +3,7 @@ package com.assembly.task.di.modules
 import com.assembly.task.BuildConfig
 import com.assembly.task.api.RedditApiServices
 import com.assembly.task.repository.PicsRepository
+import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -31,7 +32,7 @@ object AppModule {
         return Retrofit.Builder()
             .baseUrl(BuildConfig.BASE_URL)
             .client(provideHttpLogging())
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(GsonBuilder().excludeFieldsWithoutExposeAnnotation().create()))
             .build()
             .create(RedditApiServices::class.java)
     }

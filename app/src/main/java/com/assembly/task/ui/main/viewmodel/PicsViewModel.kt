@@ -24,9 +24,9 @@ import javax.inject.Inject
 @InstallIn(FragmentComponent::class,ActivityComponent::class)
 class PicsViewModel @Inject constructor(private val picsRepository: PicsRepository) : ViewModel() {
 
-    private val _picsModelResponse: MutableLiveData<Resource<PicsModel>> = MutableLiveData()
+    private val _picsModelResponse: MutableLiveData<Resource<Any>> = MutableLiveData()
 
-    val picsModelResponse: LiveData<Resource<PicsModel>>
+    val picsModelResponse: LiveData<Resource<Any>>
         get() = _picsModelResponse
 
     fun getPics() = viewModelScope.launch {

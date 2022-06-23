@@ -44,7 +44,13 @@ class ImageListAdapter @Inject constructor() : RecyclerView.Adapter<RecyclerView
 
         val postData = dataList[position]
         val viewHolder = holder as ImageItemViewHolder
-        //Glide.with(holder.itemView.context).load(postData.data.children.).apply(requestOptions).into(viewHolder.imageView)
+        //Glide.with(holder.itemView.context).load(postData.data?.thumbnail).apply(requestOptions).into(viewHolder.imageView)
+        //viewHolder.imageView.layout(0,0,0,0)
+        Glide.with(holder.itemView.context)
+        .asBitmap()
+            .fitCenter()
+            .load(postData.data?.thumbnail)
+            .into(viewHolder.imageView)
         viewHolder.itemView.setOnClickListener {
             itemClickListener.onClick(position)
         }
