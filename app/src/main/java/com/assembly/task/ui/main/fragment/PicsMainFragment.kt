@@ -2,9 +2,8 @@ package com.assembly.task.ui.main.fragment
 
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import androidx.core.app.ActivityCompat.invalidateOptionsMenu
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.assembly.task.api.network.Resource
@@ -12,6 +11,7 @@ import com.assembly.task.databinding.LayoutGalleryBinding
 import com.assembly.task.ui.main.adapter.ImageListAdapter
 import com.assembly.task.ui.main.viewmodel.PicsViewModel
 import com.assemblytask.models.PicsModel
+import com.assemblytask.models.SubRedditModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -35,13 +35,29 @@ class PicsMainFragment : Fragment() {
     @Inject
     lateinit var adapter: ImageListAdapter
 
+    var subRedditTypes = mutableListOf<String>()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = LayoutGalleryBinding.inflate(inflater, container, false)
         binding.recyclerview.adapter = adapter
-        picsViewModel.getPics()
+        picsViewModel.getPics("news")
+        picsViewModel.getSubRedditTypes()
+        picsViewModel.subRedditModelResponse.observe(viewLifecycleOwner){
+            when(it){
+                is Resource.Success ->{
+                    val subRedditChildrenList = (it.value as SubRedditModel).data?.children
+                    if (subRedditChildrenList != null) {
+                        for(redditItem in subRedditChildrenList){
+                            redditItem.data?.displayName?.let { it1 -> subRedditTypes.add(it1) }
+                        }
+                    }
+                    activity?.invalidateOptionsMenu()
+                }
+            }
+        }
         picsViewModel.picsModelResponse.observe(viewLifecycleOwner) {
             when (it) {
                 is Resource.Success -> {
@@ -52,6 +68,24 @@ class PicsMainFragment : Fragment() {
                 }
             }
         }
+        setHasOptionsMenu(true)
         return _binding!!.root
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        for(item in subRedditTypes){
+            menu.add(item)
+        }
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        picsViewModel.getPics(item.title.toString())
+        return super.onOptionsItemSelected(item)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
     }
 }

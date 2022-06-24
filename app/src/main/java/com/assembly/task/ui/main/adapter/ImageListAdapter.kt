@@ -53,8 +53,8 @@ class ImageListAdapter @Inject constructor() : RecyclerView.Adapter<RecyclerView
         viewHolder.itemView.setOnClickListener {
             itemClickListener.onClick(position)
         }
-        viewHolder.itemView.authortv.apply {
-            this.text = postData.data?.author
+        viewHolder.itemView.titletv.apply {
+            this.text = postData.data?.title
         }
         viewHolder.itemView.timestamptv.apply {
             text = "posted On "+(postData.data?.created?.let { convertLongToTime(it) })

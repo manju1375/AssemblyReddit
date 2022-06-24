@@ -5,7 +5,7 @@ import java.util.*
 
 fun convertLongToTime(time: Long): String {
     val date = Date(time)
-    val format = SimpleDateFormat("yyyy.MM.dd HH:mm")
+    val format = SimpleDateFormat("yyyy.MM.dd HH:mm:ss")
     return format.format(date)
 }
 

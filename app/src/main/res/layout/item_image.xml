@@ -15,7 +15,7 @@
         android:layout_height="wrap_content">
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/authortv"
+            android:id="@+id/titletv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="4dp"
@@ -40,7 +40,7 @@
             android:textColor="@android:color/black"
             android:textStyle="italic"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-            app:layout_constraintTop_toBottomOf="@+id/authortv" />
+            app:layout_constraintTop_toBottomOf="@+id/titletv" />
 
         <ImageView
             android:id="@+id/imageView"

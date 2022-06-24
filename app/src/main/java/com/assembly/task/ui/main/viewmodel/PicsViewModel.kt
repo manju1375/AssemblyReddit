@@ -29,8 +29,17 @@ class PicsViewModel @Inject constructor(private val picsRepository: PicsReposito
     val picsModelResponse: LiveData<Resource<Any>>
         get() = _picsModelResponse
 
-    fun getPics() = viewModelScope.launch {
-        _picsModelResponse.value = picsRepository.getPics()
+    private val _subRedditModelResponse: MutableLiveData<Resource<Any>> = MutableLiveData()
+
+    val subRedditModelResponse: LiveData<Resource<Any>>
+        get() = _subRedditModelResponse
+
+    fun getPics(subredditType: String) = viewModelScope.launch {
+        _picsModelResponse.value = picsRepository.getPics(subredditType)
+    }
+
+    fun getSubRedditTypes() = viewModelScope.launch {
+        _subRedditModelResponse.value = picsRepository.getSubRedditTypes()
     }
 
 }

@@ -10,12 +10,21 @@ import javax.inject.Inject
 
 class PicsRepository @Inject constructor(private val redditApiServices: RedditApiServices):
     BaseRepository() {
-        suspend fun getPics() = safeApiCall {
+        suspend fun getPics(subredditType:String) = safeApiCall {
             try{
-            redditApiServices.getPics()
+            redditApiServices.getPics(subredditType)
             }
             catch (e:Exception){
                 Log.d("ResultMsg",e.toString())
             }
         }
+
+    suspend fun getSubRedditTypes() = safeApiCall {
+        try{
+            redditApiServices.getSubRedditTypes()
+        }
+        catch (e:Exception){
+            Log.d("ResultMsg",e.toString())
+        }
+    }
 }
