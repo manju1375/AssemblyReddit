@@ -8,7 +8,8 @@
     android:layout_margin="8dp"
     android:orientation="vertical"
     app:cardElevation="20dp"
-    app:layout_constraintStart_toStartOf="parent">
+    app:layout_constraintStart_toStartOf="parent"
+    android:background="@color/purple_200">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -18,28 +19,30 @@
             android:id="@+id/titletv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="4dp"
-            android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="4dp"
-            android:textColor="@android:color/black"
-            android:textStyle="italic"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="4dp"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+            android:textColor="@android:color/black"
+            android:textStyle="italic|bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:ellipsize="end"
+            android:maxLines="2"/>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/timestamptv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/posted_on"
-            android:layout_marginBottom="4dp"
-            android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="4dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="4dp"
+            android:text="@string/posted_on"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
             android:textColor="@android:color/black"
             android:textStyle="italic"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
             app:layout_constraintTop_toBottomOf="@+id/titletv" />
 
         <ImageView
@@ -51,7 +54,17 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/timestamptv"
-            tools:src="@tools:sample/backgrounds/scenic" />
+            tools:src="@tools:sample/backgrounds/scenic"
+            android:layout_marginTop="5dp"/>
+
+        <ProgressBar
+            android:id="@+id/progressDialog"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:indeterminateTint="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/timestamptv" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

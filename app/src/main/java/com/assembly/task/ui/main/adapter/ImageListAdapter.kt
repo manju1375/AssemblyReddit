@@ -1,15 +1,22 @@
 package com.assembly.task.ui.main.adapter
 
 
+import android.graphics.Bitmap
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.Nullable
 import androidx.recyclerview.widget.RecyclerView
 import com.assembly.task.R
 import com.assembly.task.util.convertLongToTime
 import com.assemblytask.models.Children
 import com.bumptech.glide.Glide
 import com.bumptech.glide.Priority
+import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.item_image.view.*
 import javax.inject.Inject
@@ -19,13 +26,6 @@ class ImageListAdapter @Inject constructor() : RecyclerView.Adapter<RecyclerView
 
     var dataList = mutableListOf<Children>()
     private lateinit var itemClickListener:OnImageItemClickListener
-
-    private val requestOptions: RequestOptions = RequestOptions()
-        .centerCrop()
-        .placeholder(R.drawable.loading_drawable)
-        .error(R.drawable.ic_launcher_foreground)
-        .diskCacheStrategy(DiskCacheStrategy.ALL)
-        .priority(Priority.HIGH)
 
     fun setOnItemClickListener(itemClickListener: OnImageItemClickListener){
         this.itemClickListener = itemClickListener
@@ -46,9 +46,33 @@ class ImageListAdapter @Inject constructor() : RecyclerView.Adapter<RecyclerView
         val postData = dataList[position]
         val viewHolder = holder as ImageItemViewHolder
         Glide.with(holder.itemView.context)
+
         .asBitmap()
             .fitCenter()
             .load(postData.data?.thumbnail)
+            .listener(object : RequestListener<Bitmap?> {
+                override fun onLoadFailed(
+                    e: GlideException?,
+                    model: Any?,
+                    target: com.bumptech.glide.request.target.Target<Bitmap?>,
+                    isFirstResource: Boolean
+                ): Boolean {
+                    viewHolder.itemView.progressDialog.visibility = View.GONE
+                    return false
+                }
+
+                override fun onResourceReady(
+                    resource: Bitmap?,
+                    model: Any?,
+                    target: com.bumptech.glide.request.target.Target<Bitmap?>,
+                    dataSource: DataSource?,
+                    isFirstResource: Boolean
+                ): Boolean {
+                    viewHolder.itemView.progressDialog.visibility = View.GONE
+                    return false
+                }
+            })
+
             .into(viewHolder.imageView)
         viewHolder.itemView.setOnClickListener {
             itemClickListener.onClick(position)
@@ -69,5 +93,7 @@ class ImageListAdapter @Inject constructor() : RecyclerView.Adapter<RecyclerView
     interface OnImageItemClickListener{
         fun onClick(position: Int)
     }
+
+
 
 }
