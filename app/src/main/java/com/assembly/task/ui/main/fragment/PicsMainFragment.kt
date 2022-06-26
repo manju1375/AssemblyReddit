@@ -6,6 +6,8 @@ import android.view.*
 import androidx.core.app.ActivityCompat.invalidateOptionsMenu
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
+import com.assembly.task.R
 import com.assembly.task.api.network.Resource
 import com.assembly.task.databinding.LayoutGalleryBinding
 import com.assembly.task.ui.main.adapter.ImageListAdapter
@@ -13,6 +15,7 @@ import com.assembly.task.ui.main.viewmodel.PicsViewModel
 import com.assemblytask.models.PicsModel
 import com.assemblytask.models.SubRedditModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.layout_gallery.*
 import javax.inject.Inject
 
 /**
@@ -20,7 +23,7 @@ import javax.inject.Inject
  */
 
 @AndroidEntryPoint
-class PicsMainFragment : Fragment() {
+class PicsMainFragment : Fragment(), ImageListAdapter.OnImageItemClickListener {
 
     companion object {
         fun newInstance() = PicsMainFragment()
@@ -45,12 +48,12 @@ class PicsMainFragment : Fragment() {
         binding.recyclerview.adapter = adapter
         picsViewModel.getPics("news")
         picsViewModel.getSubRedditTypes()
-        picsViewModel.subRedditModelResponse.observe(viewLifecycleOwner){
-            when(it){
-                is Resource.Success ->{
+        picsViewModel.subRedditModelResponse.observe(viewLifecycleOwner) {
+            when (it) {
+                is Resource.Success -> {
                     val subRedditChildrenList = (it.value as SubRedditModel).data?.children
                     if (subRedditChildrenList != null) {
-                        for(redditItem in subRedditChildrenList){
+                        for (redditItem in subRedditChildrenList) {
                             redditItem.data?.displayName?.let { it1 -> subRedditTypes.add(it1) }
                         }
                     }
@@ -59,6 +62,7 @@ class PicsMainFragment : Fragment() {
             }
         }
         picsViewModel.picsModelResponse.observe(viewLifecycleOwner) {
+            progressDialog.visibility = View.GONE
             when (it) {
                 is Resource.Success -> {
                     (it.value as PicsModel).data?.children?.let { it1 -> adapter.setDetails(it1) }
@@ -69,17 +73,19 @@ class PicsMainFragment : Fragment() {
             }
         }
         setHasOptionsMenu(true)
+        adapter.setOnItemClickListener(this)
         return _binding!!.root
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        for(item in subRedditTypes){
+        for (item in subRedditTypes) {
             menu.add(item)
         }
         super.onCreateOptionsMenu(menu, inflater)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        binding.progressDialog.visibility = View.VISIBLE
         picsViewModel.getPics(item.title.toString())
         return super.onOptionsItemSelected(item)
     }
@@ -87,5 +93,12 @@ class PicsMainFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
+    }
+
+    override fun onClick(position: Int) {
+        picsViewModel.selectedItem.postValue(
+            adapter.dataList[position].data
+        )
+        findNavController().navigate(R.id.action_picsMainFragment_to_picsDetailsFragment)
     }
 }

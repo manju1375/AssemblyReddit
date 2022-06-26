@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.assembly.task.api.network.Resource
+import com.assembly.task.model.ChildrenData
 import com.assembly.task.repository.PicsRepository
 import com.assemblytask.models.PicsModel
 import dagger.Module
@@ -33,6 +34,9 @@ class PicsViewModel @Inject constructor(private val picsRepository: PicsReposito
 
     val subRedditModelResponse: LiveData<Resource<Any>>
         get() = _subRedditModelResponse
+
+    var selectedItem = MutableLiveData<ChildrenData>()
+
 
     fun getPics(subredditType: String) = viewModelScope.launch {
         _picsModelResponse.value = picsRepository.getPics(subredditType)
