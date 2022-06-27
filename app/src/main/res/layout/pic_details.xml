@@ -35,6 +35,14 @@
         android:paddingTop="4dp"
         android:padding="16dp"
         android:textAppearance="?attr/textAppearanceBody1" />
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/favoritebutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Test" />
+
+
+
 
 </androidx.appcompat.widget.LinearLayoutCompat>
 </ScrollView>

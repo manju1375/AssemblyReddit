@@ -1,7 +1,6 @@
 package com.assembly.task.ui.main.fragment
 
 
-import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.assembly.task.R
+import com.assembly.task.data.AppPreferencesHelper
 import com.assembly.task.databinding.PicDetailsBinding
 import com.assembly.task.model.ChildrenData
 import com.assembly.task.ui.main.viewmodel.PicsViewModel
@@ -21,7 +21,8 @@ import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.RequestOptions
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.item_image.view.*
+import kotlinx.android.synthetic.main.pic_details.*
+import javax.inject.Inject
 
 
 /**
@@ -39,6 +40,9 @@ class PicsDetailsFragment : Fragment() {
     private val binding get() = _binding!!
 
     val requestOptions: RequestOptions
+
+    @Inject
+    lateinit var  preferenceHelper:AppPreferencesHelper
 
     init {
         requestOptions = RequestOptions()
@@ -88,11 +92,37 @@ class PicsDetailsFragment : Fragment() {
                     .apply(requestOptions).into(binding.imageView)
             }
         }
-        binding.title.text = picsDetailsViewModel.selectedItem.value?.title
-        binding.explanation.text = picsDetailsViewModel.selectedItem.value?.authorFullname
-        return binding.root
+        binding.title.text = (if(preferenceHelper.getFavorites()
+                ?.contains(picsDetailsViewModel.selectedItem.value?.id) == true
+        ){
+            "Favorite"
+        }else{
+            "Not Favorite"
+        })
+            .toString()
 
-    }
+            binding.explanation.text = picsDetailsViewModel.selectedItem.value?.authorFullname
+            binding.favoritebutton.setOnClickListener {
+                if (preferenceHelper.getFavorites()
+                        ?.contains(picsDetailsViewModel.selectedItem.value?.id) == true
+                ) {
+                    title.append("Making not Favorite")
+                    picsDetailsViewModel.selectedItem.value?.id?.let { it1 ->
+                        preferenceHelper.deleteFromFavorites(
+                            it1
+                        )
+                    }
+                } else {
+                    title.append("Making Favorite")
+                    picsDetailsViewModel.selectedItem.value?.id?.let { it1 ->
+                        preferenceHelper.addToFavorites(it1)
+                    }
+                }
+            }
+            return binding.root
+        }
+
+
 
     override fun onDestroyView() {
         super.onDestroyView()
