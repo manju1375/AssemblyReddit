@@ -92,28 +92,26 @@ class PicsDetailsFragment : Fragment() {
                     .apply(requestOptions).into(binding.imageView)
             }
         }
-        binding.title.text = (if(preferenceHelper.getFavorites()
-                ?.contains(picsDetailsViewModel.selectedItem.value?.id) == true
-        ){
-            "Favorite"
+        if(preferenceHelper.getFavorites()
+                ?.contains(picsDetailsViewModel.selectedItem.value?.id) == true){
+           binding.favoritebutton.setBackgroundResource(R.drawable.ic_favorite)
         }else{
-            "Not Favorite"
-        })
-            .toString()
+            binding.favoritebutton.setBackgroundResource(R.drawable.ic_un_favorite)
+        }
 
             binding.explanation.text = picsDetailsViewModel.selectedItem.value?.authorFullname
             binding.favoritebutton.setOnClickListener {
                 if (preferenceHelper.getFavorites()
                         ?.contains(picsDetailsViewModel.selectedItem.value?.id) == true
                 ) {
-                    title.append("Making not Favorite")
+                    binding.favoritebutton.setBackgroundResource(R.drawable.ic_un_favorite)
                     picsDetailsViewModel.selectedItem.value?.id?.let { it1 ->
                         preferenceHelper.deleteFromFavorites(
                             it1
                         )
                     }
                 } else {
-                    title.append("Making Favorite")
+                    binding.favoritebutton.setBackgroundResource(R.drawable.ic_favorite)
                     picsDetailsViewModel.selectedItem.value?.id?.let { it1 ->
                         preferenceHelper.addToFavorites(it1)
                     }
