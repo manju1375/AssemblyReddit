@@ -46,15 +46,14 @@ class ImageListAdapter @Inject constructor() : RecyclerView.Adapter<RecyclerView
         val postData = dataList[position]
         val viewHolder = holder as ImageItemViewHolder
         Glide.with(holder.itemView.context)
-
-        .asBitmap()
+            .asDrawable()
             .fitCenter()
             .load(postData.data?.thumbnail)
-            .listener(object : RequestListener<Bitmap?> {
+            .listener(object : RequestListener<Drawable?> {
                 override fun onLoadFailed(
                     e: GlideException?,
                     model: Any?,
-                    target: com.bumptech.glide.request.target.Target<Bitmap?>,
+                    target: com.bumptech.glide.request.target.Target<Drawable?>,
                     isFirstResource: Boolean
                 ): Boolean {
                     viewHolder.itemView.progressDialog.visibility = View.GONE
@@ -62,9 +61,9 @@ class ImageListAdapter @Inject constructor() : RecyclerView.Adapter<RecyclerView
                 }
 
                 override fun onResourceReady(
-                    resource: Bitmap?,
+                    resource: Drawable?,
                     model: Any?,
-                    target: com.bumptech.glide.request.target.Target<Bitmap?>,
+                    target: com.bumptech.glide.request.target.Target<Drawable?>,
                     dataSource: DataSource?,
                     isFirstResource: Boolean
                 ): Boolean {

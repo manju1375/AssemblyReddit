@@ -8,7 +8,6 @@
     <fragment
         android:id="@+id/picsMainFragment"
         android:name="com.assembly.task.ui.main.fragment.PicsMainFragment"
-        android:label="fragment_main"
         tools:layout="@layout/fragment_main" >
         <action
             android:id="@+id/action_picsMainFragment_to_picsDetailsFragment"
@@ -16,8 +15,7 @@
     </fragment>
     <fragment
         android:id="@+id/picsDetailsFragment"
-        android:name="com.assembly.task.ui.main.fragment.PicsDetailsFragment"
-        android:label="PicsDetailsFragment" >
+        android:name="com.assembly.task.ui.main.fragment.PicsDetailsFragment">
         <action
             android:id="@+id/action_picsDetailsFragment_to_picsMainFragment"
             app:destination="@id/picsMainFragment" />

@@ -1,7 +1,7 @@
 package com.assembly.task.api
 
 import com.assemblytask.models.PicsModel
-import com.assemblytask.models.SubRedditModel
+import com.assembly.task.model.subreddittypes.SubRedditModel
 import retrofit2.http.GET
 import retrofit2.http.Path
 

@@ -1,4 +1,4 @@
-package com.assembly.task.model
+package com.assembly.task.model.subreddittypes
 
 import com.assembly.task.modelimport.MediaEmbed
 import com.assemblytask.models.AllAwardings

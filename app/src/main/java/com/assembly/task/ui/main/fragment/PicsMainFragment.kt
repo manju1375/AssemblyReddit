@@ -1,9 +1,8 @@
 package com.assembly.task.ui.main.fragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
-import androidx.core.app.ActivityCompat.invalidateOptionsMenu
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -13,10 +12,12 @@ import com.assembly.task.databinding.LayoutGalleryBinding
 import com.assembly.task.ui.main.adapter.ImageListAdapter
 import com.assembly.task.ui.main.viewmodel.PicsViewModel
 import com.assemblytask.models.PicsModel
-import com.assemblytask.models.SubRedditModel
+import com.assembly.task.model.subreddittypes.SubRedditChildren
+import com.assembly.task.model.subreddittypes.SubRedditModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.layout_gallery.*
 import javax.inject.Inject
+
 
 /**
  * Developed by Manjunath on 19,June,2022
@@ -40,19 +41,19 @@ class PicsMainFragment : Fragment(), ImageListAdapter.OnImageItemClickListener {
 
     var subRedditTypes = mutableListOf<String>()
 
+    var subRedditChildrenList = mutableListOf<SubRedditChildren>()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = LayoutGalleryBinding.inflate(inflater, container, false)
         binding.recyclerview.adapter = adapter
-        picsViewModel.getPics("news")
-        picsViewModel.getSubRedditTypes()
         picsViewModel.subRedditModelResponse.observe(viewLifecycleOwner) {
             when (it) {
                 is Resource.Success -> {
-                    val subRedditChildrenList = (it.value as SubRedditModel).data?.children
-                    if (subRedditChildrenList != null) {
+                    if (subRedditChildrenList.size == 0) {
+                        subRedditChildrenList = (it.value as SubRedditModel).data?.children!!
                         for (redditItem in subRedditChildrenList) {
                             redditItem.data?.displayName?.let { it1 -> subRedditTypes.add(it1) }
                         }
@@ -87,12 +88,15 @@ class PicsMainFragment : Fragment(), ImageListAdapter.OnImageItemClickListener {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         binding.progressDialog.visibility = View.VISIBLE
         picsViewModel.getPics(item.title.toString())
+        (activity as AppCompatActivity?)!!.supportActionBar!!.title = item.title.toString()
         return super.onOptionsItemSelected(item)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
+        picsViewModel.getPics("news")
+        picsViewModel.getSubRedditTypes()
+        (activity as AppCompatActivity?)!!.supportActionBar!!.title = "News"
     }
 
     override fun onClick(position: Int) {

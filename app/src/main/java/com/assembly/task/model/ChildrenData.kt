@@ -35,6 +35,10 @@ data class ChildrenData (
     @SerializedName("clicked")
     val clicked: Boolean? = null,
 
+    @SerializedName("is_gallery")
+    @Expose
+    val is_gallery: Boolean? = false,
+
     @SerializedName("title")
     @Expose
     val title: String? = null,
@@ -347,4 +351,6 @@ data class ChildrenData (
 
     @SerializedName("link_flair_template_id")
     val linkFlairTemplateID: String? = null
+
+
 )
