@@ -98,7 +98,7 @@ class PicsDetailsFragment : Fragment() {
         }else{
             binding.favoritebutton.setBackgroundResource(R.drawable.ic_un_favorite)
         }
-
+            binding.title.text = picsDetailsViewModel.selectedItem.value?.title
             binding.explanation.text = picsDetailsViewModel.selectedItem.value?.authorFullname
             binding.favoritebutton.setOnClickListener {
                 if (preferenceHelper.getFavorites()
