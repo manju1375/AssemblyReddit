@@ -22,6 +22,11 @@ This app follows MVVM architecture design pattern which is one of the most popul
 11.	Mockito
 12.	PowerMockito
 
+## Architecture
+<img alt="App High Level Architecture" height="500px" src="https://github.com/manju1375/AssemblyReddit/blob/master/RedditAppAchitecture.PNG" />
+
+### Demo
+<img height="400px" src="https://github.com/manju1375/AssemblyReddit/blob/master/demoreddit.gif" />
 
 ## Author
 [Manjunath D]( https://github.com/manju1375)
