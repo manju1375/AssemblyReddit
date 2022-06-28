@@ -3,4 +3,7 @@
     <string name="author">Author</string>
     <string name="created">Created</string>
     <string name="posted_on">posted On</string>
+    <string name="redditstring">Reddit</string>
+    <string name="gaming">gaming</string>
+    <string name="posted_by">Posted by</string>
 </resources>

@@ -99,7 +99,8 @@ class PicsDetailsFragment : Fragment() {
             binding.favoritebutton.setBackgroundResource(R.drawable.ic_un_favorite)
         }
             binding.title.text = picsDetailsViewModel.selectedItem.value?.title
-            binding.explanation.text = picsDetailsViewModel.selectedItem.value?.authorFullname
+            binding.explanation.text =
+                "${resources.getString(R.string.posted_by)} ${picsDetailsViewModel.selectedItem.value?.authorFullname}"
             binding.favoritebutton.setOnClickListener {
                 if (preferenceHelper.getFavorites()
                         ?.contains(picsDetailsViewModel.selectedItem.value?.id) == true

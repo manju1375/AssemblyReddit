@@ -88,15 +88,17 @@ class PicsMainFragment : Fragment(), ImageListAdapter.OnImageItemClickListener {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         binding.progressDialog.visibility = View.VISIBLE
         picsViewModel.getPics(item.title.toString())
-        (activity as AppCompatActivity?)!!.supportActionBar!!.title = item.title.toString()
+        (activity as AppCompatActivity?)!!.supportActionBar!!.title =
+            "${resources.getString(R.string.redditstring)}  ${item.title.toString()}"
         return super.onOptionsItemSelected(item)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        picsViewModel.getPics("news")
+        picsViewModel.getPics(resources.getString(R.string.gaming))
         picsViewModel.getSubRedditTypes()
-        (activity as AppCompatActivity?)!!.supportActionBar!!.title = "News"
+        (activity as AppCompatActivity?)!!.supportActionBar!!.title =
+            "${resources.getString(R.string.redditstring)}  ${resources.getString(R.string.gaming)}"
     }
 
     override fun onClick(position: Int) {
