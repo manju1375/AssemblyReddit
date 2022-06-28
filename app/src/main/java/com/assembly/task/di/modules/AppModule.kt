@@ -2,7 +2,7 @@ package com.assembly.task.di.modules
 
 import com.assembly.task.BuildConfig
 import com.assembly.task.api.RedditApiServices
-import com.assembly.task.repository.PicsRepository
+import com.assembly.task.repository.RedditDetailsRepository
 import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
@@ -39,8 +39,8 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun providePicsRepository(redditApiServices: RedditApiServices): PicsRepository{
-            return PicsRepository(redditApiServices)
+    fun providePicsRepository(redditApiServices: RedditApiServices): RedditDetailsRepository{
+            return RedditDetailsRepository(redditApiServices)
     }
 
     private fun provideHttpLogging(): OkHttpClient {

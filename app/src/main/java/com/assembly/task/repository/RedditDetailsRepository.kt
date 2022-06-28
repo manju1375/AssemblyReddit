@@ -8,7 +8,7 @@ import javax.inject.Inject
  * Developed by Manjunath on 19,June,2022
  */
 
-class PicsRepository @Inject constructor(private val redditApiServices: RedditApiServices):
+class RedditDetailsRepository @Inject constructor(private val redditApiServices: RedditApiServices):
     BaseRepository() {
         suspend fun getPics(subredditType:String) = safeApiCall {
             try{

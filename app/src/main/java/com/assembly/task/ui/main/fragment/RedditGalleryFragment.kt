@@ -10,7 +10,7 @@ import com.assembly.task.R
 import com.assembly.task.api.network.Resource
 import com.assembly.task.databinding.LayoutGalleryBinding
 import com.assembly.task.ui.main.adapter.ImageListAdapter
-import com.assembly.task.ui.main.viewmodel.PicsViewModel
+import com.assembly.task.ui.main.viewmodel.RedditDataViewModel
 import com.assemblytask.models.PicsModel
 import com.assembly.task.model.subreddittypes.SubRedditChildren
 import com.assembly.task.model.subreddittypes.SubRedditModel
@@ -24,17 +24,17 @@ import javax.inject.Inject
  */
 
 @AndroidEntryPoint
-class PicsMainFragment : Fragment(), ImageListAdapter.OnImageItemClickListener {
+class RedditGalleryFragment : Fragment(), ImageListAdapter.OnImageItemClickListener {
 
     companion object {
-        fun newInstance() = PicsMainFragment()
+        fun newInstance() = RedditGalleryFragment()
     }
 
     private var _binding: LayoutGalleryBinding? = null
 
     private val binding get() = _binding!!
 
-    private val picsViewModel: PicsViewModel by activityViewModels()
+    private val picsViewModel: RedditDataViewModel by activityViewModels()
 
     @Inject
     lateinit var adapter: ImageListAdapter

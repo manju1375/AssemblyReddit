@@ -12,7 +12,7 @@ import com.assembly.task.R
 import com.assembly.task.data.AppPreferencesHelper
 import com.assembly.task.databinding.PicDetailsBinding
 import com.assembly.task.model.ChildrenData
-import com.assembly.task.ui.main.viewmodel.PicsViewModel
+import com.assembly.task.ui.main.viewmodel.RedditDataViewModel
 import com.bumptech.glide.Glide
 import com.bumptech.glide.Priority
 import com.bumptech.glide.load.DataSource
@@ -21,19 +21,18 @@ import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.RequestOptions
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.pic_details.*
 import javax.inject.Inject
 
 
 /**
- * [PicsDetailsFragment] Details Fragment
+ * [RedditItemDetailsFragment] Details Fragment
  */
 @AndroidEntryPoint
-class PicsDetailsFragment : Fragment() {
+class RedditItemDetailsFragment : Fragment() {
 
     private var _binding: PicDetailsBinding? = null
 
-    val picsDetailsViewModel: PicsViewModel by activityViewModels()
+    val picsDetailsViewModel: RedditDataViewModel by activityViewModels()
 
     // This property is only valid between onCreateView and
     // onDestroyView.

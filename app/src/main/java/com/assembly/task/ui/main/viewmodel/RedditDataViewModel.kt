@@ -6,8 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.assembly.task.api.network.Resource
 import com.assembly.task.model.ChildrenData
-import com.assembly.task.repository.PicsRepository
-import com.assemblytask.models.PicsModel
+import com.assembly.task.repository.RedditDetailsRepository
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityComponent
@@ -23,7 +22,7 @@ import javax.inject.Inject
 @HiltViewModel
 @Module
 @InstallIn(FragmentComponent::class,ActivityComponent::class)
-class PicsViewModel @Inject constructor(private val picsRepository: PicsRepository) : ViewModel() {
+class RedditDataViewModel @Inject constructor(private val picsRepository: RedditDetailsRepository) : ViewModel() {
 
     private val _picsModelResponse: MutableLiveData<Resource<Any>> = MutableLiveData()
 
