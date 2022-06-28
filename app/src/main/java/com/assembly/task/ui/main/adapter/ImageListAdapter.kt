@@ -1,26 +1,25 @@
 package com.assembly.task.ui.main.adapter
 
 
-import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.Nullable
 import androidx.recyclerview.widget.RecyclerView
 import com.assembly.task.R
 import com.assembly.task.util.convertLongToTime
 import com.assemblytask.models.Children
 import com.bumptech.glide.Glide
-import com.bumptech.glide.Priority
 import com.bumptech.glide.load.DataSource
-import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
-import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.item_image.view.*
 import javax.inject.Inject
 
+
+/**
+ * Developed by Manjunath on 19,June,2022
+ */
 
 class ImageListAdapter @Inject constructor() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 

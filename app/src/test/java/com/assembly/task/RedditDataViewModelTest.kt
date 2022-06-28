@@ -12,7 +12,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.TestCoroutineDispatcher
-import kotlinx.coroutines.test.runBlockingTest
 import kotlinx.coroutines.test.setMain
 import org.junit.Assert.assertEquals
 import org.junit.Before
@@ -27,10 +26,9 @@ class RedditDataViewModelTest {
     @ExperimentalCoroutinesApi
     private val testDispatcher = TestCoroutineDispatcher()
     private var context: Context? = null
-    lateinit var repo: RedditDetailsRepository
+    private lateinit var repo: RedditDetailsRepository
     private var gson:Gson? = null
-    private lateinit var jsonString: String
-    lateinit var redditApiServices: RedditApiServices
+    private lateinit var redditApiServices: RedditApiServices
 
     @Before
     fun setUp() {

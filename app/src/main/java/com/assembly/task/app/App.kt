@@ -1,4 +1,4 @@
-package com.kotlin.mvvm.app
+package com.assembly.task.app
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

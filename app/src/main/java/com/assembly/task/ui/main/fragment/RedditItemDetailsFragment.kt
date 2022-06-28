@@ -25,6 +25,7 @@ import javax.inject.Inject
 
 
 /**
+ * Developed by Manjunath on 19,June,2022
  * [RedditItemDetailsFragment] Details Fragment
  */
 @AndroidEntryPoint
@@ -32,24 +33,20 @@ class RedditItemDetailsFragment : Fragment() {
 
     private var _binding: PicDetailsBinding? = null
 
-    val picsDetailsViewModel: RedditDataViewModel by activityViewModels()
+    private val picsDetailsViewModel: RedditDataViewModel by activityViewModels()
 
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
 
-    val requestOptions: RequestOptions
+    private val requestOptions: RequestOptions = RequestOptions()
+        .placeholder(R.drawable.loading_drawable)
+        .centerCrop()
+        .diskCacheStrategy(DiskCacheStrategy.ALL)
+        .priority(Priority.HIGH)
 
     @Inject
     lateinit var  preferenceHelper:AppPreferencesHelper
-
-    init {
-        requestOptions = RequestOptions()
-            .placeholder(R.drawable.loading_drawable)
-            .centerCrop()
-            .diskCacheStrategy(DiskCacheStrategy.ALL)
-            .priority(Priority.HIGH)
-    }
 
 
     override fun onCreateView(

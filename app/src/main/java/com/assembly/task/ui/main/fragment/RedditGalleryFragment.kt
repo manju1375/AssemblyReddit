@@ -9,11 +9,11 @@ import androidx.navigation.fragment.findNavController
 import com.assembly.task.R
 import com.assembly.task.api.network.Resource
 import com.assembly.task.databinding.LayoutGalleryBinding
+import com.assembly.task.model.subreddittypes.SubRedditChildren
+import com.assembly.task.model.subreddittypes.SubRedditModel
 import com.assembly.task.ui.main.adapter.ImageListAdapter
 import com.assembly.task.ui.main.viewmodel.RedditDataViewModel
 import com.assemblytask.models.PicsModel
-import com.assembly.task.model.subreddittypes.SubRedditChildren
-import com.assembly.task.model.subreddittypes.SubRedditModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.layout_gallery.*
 import javax.inject.Inject
@@ -26,10 +26,6 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class RedditGalleryFragment : Fragment(), ImageListAdapter.OnImageItemClickListener {
 
-    companion object {
-        fun newInstance() = RedditGalleryFragment()
-    }
-
     private var _binding: LayoutGalleryBinding? = null
 
     private val binding get() = _binding!!
@@ -39,9 +35,9 @@ class RedditGalleryFragment : Fragment(), ImageListAdapter.OnImageItemClickListe
     @Inject
     lateinit var adapter: ImageListAdapter
 
-    var subRedditTypes = mutableListOf<String>()
+    private var subRedditTypes = mutableListOf<String>()
 
-    var subRedditChildrenList = mutableListOf<SubRedditChildren>()
+    private var subRedditChildrenList = mutableListOf<SubRedditChildren>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -89,7 +85,7 @@ class RedditGalleryFragment : Fragment(), ImageListAdapter.OnImageItemClickListe
         binding.progressDialog.visibility = View.VISIBLE
         picsViewModel.getPics(item.title.toString())
         (activity as AppCompatActivity?)!!.supportActionBar!!.title =
-            "${resources.getString(R.string.redditstring)}  ${item.title.toString()}"
+            "${resources.getString(R.string.redditstring)}  ${item.title}"
         return super.onOptionsItemSelected(item)
     }
 
